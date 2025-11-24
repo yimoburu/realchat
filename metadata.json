@@ -1,0 +1,5 @@
+{
+  "name": "Consensus AI",
+  "description": "A multi-agent chat interface where simulated LLMs (Gemini, ChatGPT, Claude) debate, cross-check, and refine answers to reach a consensus.",
+  "requestFramePermissions": []
+}
