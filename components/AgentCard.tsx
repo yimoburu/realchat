@@ -9,18 +9,18 @@ interface AgentCardProps {
   isLatest: boolean;
 }
 
-const AgentCard: React.FC<AgentCardProps> = ({ response, isLatest }) => {
-  const agentConfig = AGENTS.find(a => a.id === response.agentId) || AGENTS[0];
-  
-  const Icon = () => {
-    switch (agentConfig.id) {
+const AgentIcon: React.FC<{ id: string }> = ({ id }) => {
+    switch (id) {
         case 'gemini': return <Sparkles size={16} />;
         case 'gpt': return <Bot size={16} />;
         case 'claude': return <Cpu size={16} />;
         default: return <Bot size={16} />;
     }
-  }
+};
 
+const AgentCard: React.FC<AgentCardProps> = ({ response, isLatest }) => {
+  const agentConfig = AGENTS.find(a => a.id === response.agentId) || AGENTS[0];
+  
   return (
     <div className={`
       flex flex-col border rounded-lg p-4 mb-3 transition-all duration-300
@@ -28,7 +28,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ response, isLatest }) => {
     `}>
       <div className="flex items-center gap-2 mb-2">
         <div className={`p-1.5 rounded-md ${agentConfig.color} text-white`}>
-            <Icon />
+            <AgentIcon id={agentConfig.id} />
         </div>
         <span className="font-semibold text-sm text-slate-200">{agentConfig.name}</span>
         {response.isThinking && (
